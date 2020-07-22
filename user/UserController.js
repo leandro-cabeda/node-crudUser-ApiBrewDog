@@ -10,7 +10,9 @@ module.exports = app => {
         
         res.status(200).render("api/user/index", { errs:[],ok:"", user: req.session.data });
     });
-    app.post("/api/user/login",(req, res) => {
+
+    app.route("/api/user/login")
+    .post((req, res) => {
 
         const user = req.body;
         erros=verifyData(erros,user);
@@ -48,6 +50,9 @@ module.exports = app => {
             res.status(500).render("login", { errs: [{ msg:"Ocorreu falha durante a conexão do banco "+err}], user });
         });
 
+    }).get(sessionToken,(req,res)=>{
+
+        accessData(res,[],"",req.session.data);
     });
 
     app.route("/api/user/save")
