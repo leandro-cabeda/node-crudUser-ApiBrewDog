@@ -1,0 +1,14 @@
+body{
+    background: #8595a0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.color-text{
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+textarea{
+    resize: none !important;
+}

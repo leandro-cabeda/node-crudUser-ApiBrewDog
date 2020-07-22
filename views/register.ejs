@@ -1,0 +1,67 @@
+<%- include("partials/header.ejs") %>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#links" aria-controls="links"
+        aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="navbar-brand mr-auto ml-2">
+        <i class="fa fa-home"></i> Home
+    </a>
+    <div class="collapse navbar-collapse" id="links">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/api/punk/index"><i class="fa fa-bahai"></i> BrewDog</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/login"><i class="fa fa-sign-in"></i> Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register"><i class="fa fa-id-card"></i> Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-3 mb-5">
+    <% if(errs.length>0) { %>
+    <div class="row justify-content-center" id="errs">
+        <div class="col-md-6 col-12">
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Atenção!</strong>
+                <ul>
+                    <% for (var i=0; i < errs.length; i++) { %>
+                    <li><%= errs[i].msg %> </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Cadastro de Usuário</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/api/user/save" method="POST">
+                        <div class="form-group">
+                            <label for="email">*E-mail:</label>
+                            <input type="email" class="form-control" value="<%= user.email %>" name="email"
+                                placeholder="email@exemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">*Password:</label>
+                            <input type="password" class="form-control" value="<%= user.password %>"
+                                name="password" placeholder="*******">
+                        </div>
+                        <button type="submit" class="btn btn-block btn-success">Cadrastar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer.ejs") %>

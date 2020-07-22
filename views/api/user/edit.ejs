@@ -1,0 +1,86 @@
+<%- include("../../partials/header.ejs") %>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#links" aria-controls="links"
+        aria-expanded="false" aria-label="Alterna navegação">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="navbar-brand mr-auto ml-2">
+        <i class="fa fa-home"></i> Home
+    </a>
+    <div class="collapse navbar-collapse" id="links">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/api/punk/index"><i class="fa fa-bahai"></i> BrewDog</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <form action="/api/user/edit" method="POST">
+                    <input type="hidden" name="id" value="<%= user.id %>">
+                    <button class="btn btn-success mr-3 mt-1 pb-0 pl-1 pr-1 pt-1" type="submit">
+                        <i class="fas fa-edit"></i>
+                         Editar Dados
+                    </button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/api/user/logout"><i class="fa
+                        fa-sign-out"></i> Sair</a>
+            </li>
+            <li class="nav-item">
+                <form onsubmit="confirmarDelecao(event,this);"
+                    action="/api/user/delete" method="POST">
+                    <input type="hidden" name="id" value="<%= user.id %>">
+                    <button class="btn btn-danger ml-4 mt-1 pb-0 pl-1 pr-1 pt-1" type="submit">
+                        <i class="fas fa-trash"></i>
+                         Deletar
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-3 mb-5">
+    <% if(errs.length>0) { %>
+    <div class="row justify-content-center" id="errs">
+        <div class="col-md-6 col-12">
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Atenção!</strong>
+                <ul>
+                    <% for (var i=0; i < errs.length; i++) { %>
+                    <li><%= errs[i].msg %> </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Atualizar o Usuário</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/api/user/update" method="POST">
+                        <input type="hidden" name="id" value="<%= user.id %>">
+                        <div class="form-group">
+                            <label for="email">*E-mail:</label>
+                            <input type="email" class="form-control" value="<%= user.email %>" name="email"
+                                placeholder="email@exemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">*Password:</label>
+                            <input type="password" class="form-control" value="<%= user.password %>"
+                                name="password" placeholder="*******">
+                        </div>
+                        <button type="submit" class="btn btn-block btn-success">Atualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../../partials/footer.ejs") %>
